@@ -1,0 +1,14 @@
+body {
+    background-color: aliceblue;
+    padding-top: 50px;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+#maps_style{
+    height: 400px;
+    width : 600px;
+    border: 2px solid black;
+    margin: 0 auto;
+}

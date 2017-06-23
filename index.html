@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" ng-app = "myApp">
-    <head>co
+    <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,7 +14,7 @@
         <link rel="stylesheet" type="text/css" href="starter-template.css">
         <!--<link rel="icon" href="../../favicon.ico">-->
 
-        <title>Sophia- The BOSS</title>
+        <title>Maps</title>
 
     </head>
 
@@ -22,26 +22,8 @@
 
         <div class="container">
             <div class="starter-template">
-                <div ng-controller="mainController">    
-                    <h1>Maps</h1>
-                    
-                    Enter a products name:
-                    
-                    <input type="text" name="product" id="product" ng-model = "id_product" ng-keyup="complete(id_product)"/> 
-                    
-                    <ul class="list-group" ng-model="hidethis" ng-hide="hidethis">
-                        <li class="list-group-item" ng-repeat="productdata in filterProduct" ng-click="fillTextbox(productdata)">
-                            {{productdata}}
-                        </li>
-                    </ul>
-                    
-                    <input type = "text" ng-model="search">
-                    
-                    <br>
-                    
+                <div ng-controller="mainController">                       
                     <my-maps id="maps_style"></my-maps>
-                    
-                    <br>
                     <input type="text" id="address" placeholder="Location to search for">
                     <input type="text" id="searchfor" placeholder="Search Criteria">
                     <button type="button" id="btnNewSearch" name="btnNewSearch" ng-click="searchCriteria()" >Search</button>
@@ -49,8 +31,7 @@
                 </div>
             </div>
         </div><!-- /.container -->
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7ALaX6DMSttr_8yB-Z1pi0LOeDF7P07M&libraries=places&callback=initMap"></script>
-  </body>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC7ALaX6DMSttr_8yB-Z1pi0LOeDF7P07M&libraries=places&callback=initMap">
         </script>
     </body>
 </html>

@@ -6,7 +6,7 @@ myApp.directive("myMaps",function(){
         template: '<div></div>',
         replace: true,
         link: function ( scope, element, attrs){
-            var myLatlng = new google.maps.LatLng(28.070011,83.24939);
+            var myLatlng = new google.maps.LatLng(39.2904,76.6122);
             var mapOptions = {
                 center: myLatlng,
                 zoom: 16,
@@ -25,30 +25,12 @@ myApp.directive("myMaps",function(){
 });
 
 myApp.controller("mainController", function($scope) {
-    $scope.productList = [
-        "shampoo","conditioner","soap","body wash","face wash","body cream","face cream","body lotion","hair spray"];
-    $scope.complete = function(string) {
-        var output = [];
-        angular.forEach($scope.productList, function(product){
-           if(product.toLowerCase().indexOf(string.toLowerCase())>=0) {
-               output.push(product);
-           } 
-        });
-        $scope.filterProduct = output;
-    }
-    $scope.fillTextbox = function(string) {
-        $scope.product = string;
-        $scope.hidethis = true;
-    }
-    
     $scope.findMe = function() {
-        console.log("Inside Custom.");
         map = new google.maps.Map(document.getElementById('maps_style'), {
             center: {lat: -34.397, lng: 150.644},
             zoom: 6
         });
         infoWindow = new google.maps.InfoWindow;
-
         //Try HTML5 geolocation.
         if (true) {
             navigator.geolocation.getCurrentPosition(function(position) {
@@ -70,40 +52,11 @@ myApp.controller("mainController", function($scope) {
         }
     }
     
-    $scope.codeAddress = function() {
-        var geocoder;
-        geocoder = new google.maps.Geocoder();
-        console.log("I am here");
-        var myLatlng = new google.maps.LatLng(-34.397, 150.644);
-        var mapOptions = {
-            zoom: 8,
-            center: myLatlng
-        }
-        var map;
-        map = new google.maps.Map(document.getElementById('maps_style'), mapOptions);
-        console.log("In codeAddress");
-        var address = document.getElementById('address').value;
-        console.log(address);
-        geocoder.geocode({
-            'address': address
-        }, function(results, status) {
-            if (status == 'OK') {
-                map.setCenter(results[0].geometry.location);
-                var marker = new google.maps.Marker({
-                    map: map,
-                    position: results[0].geometry.location
-                });
-                
-            } else {
-                alert('Geocode was not successful for the following reason: ' + status);
-            }
-            console.log(results[0].geometry.location);
-        });    
-    }
-    
     $scope.searchCriteria = function() {
         var address = document.getElementById('address').value;
         var searchfor = document.getElementById('searchfor').value;
+        console.log("address:" +address);
+        console.log("searchfor:" +searchfor);
         var geocoder = new google.maps.Geocoder();
         
         if(searchfor === ''){
@@ -112,8 +65,6 @@ myApp.controller("mainController", function($scope) {
         
         geocoder.geocode( { 'address': address}, function(results, status) {
             if (status == google.maps.GeocoderStatus.OK) {
-                //alert("Latitude: "+results[0].geometry.location.lat());
-                //alert("Longitude: "+results[0].geometry.location.lng());
                 var pyrmont = new google.maps.LatLng(results[0].geometry.location.lat(), results[0].geometry.location.lng());
                 map = new google.maps.Map(document.getElementById('maps_style'), {
                   center: pyrmont,
@@ -125,7 +76,7 @@ myApp.controller("mainController", function($scope) {
                 service.nearbySearch({
                   location: pyrmont,
                   radius: 500,
-                  type:'gym'
+                  type: searchfor
                 }, callback);
             } 
             else {
@@ -137,7 +88,7 @@ myApp.controller("mainController", function($scope) {
 
 function initMap() {
     map = new google.maps.Map(document.getElementById('maps_style'), {
-        center: {lat: -34.397, lng: 150.644},
+        center: {lat: 39.2904, lng: 76.6122},
         zoom: 6
     });
     infoWindow = new google.maps.InfoWindow;
